@@ -204,7 +204,7 @@ func (c *Client) GetFromImage(ctx context.Context, img image.Image, opts ...Opti
 		ptrOpts = &copyOpts
 	}
 
-	ptrOpts.applyResizeOptions(img)
+	img = ptrOpts.applyResizeOptions(img)
 
 	return core.GenerateASCIIImage(ctx, img, &ptrOpts.Core)
 }

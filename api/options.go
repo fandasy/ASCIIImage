@@ -227,7 +227,7 @@ func (o *Options) validate() {
 //   - Enforces MaxWidth / MaxHeight constraints
 //   - Applies compression if specified.
 //     Maintains aspect ratio during resizing
-func (o *Options) applyResizeOptions(img image.Image) {
+func (o *Options) applyResizeOptions(img image.Image) image.Image {
 	bounds := img.Bounds()
 	width := uint(bounds.Max.X)
 	height := uint(bounds.Max.Y)
@@ -258,6 +258,8 @@ func (o *Options) applyResizeOptions(img image.Image) {
 		newWidth = (width * (compressionFactor)) / 100
 		newHeight = (height * (compressionFactor)) / 100
 
-		img = resize.Resize(newWidth, newHeight, img)
+		return resize.Resize(newWidth, newHeight, img)
 	}
+
+	return img
 }
